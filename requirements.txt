@@ -1,7 +1,7 @@
 # Docker base image: `gcr.io/deeplearning-platform-release/tf2-gpu.2-6:latest`
-tensorflow==2.6.2 # The latest should include tensorflow-gpu
-tensorflow-datasets==4.4.0
-tensorflow-addons==0.15.0
+tensorflow==2.13.0
+tensorflow-datasets
+tensorflow-addons
 absl-py==0.12.0
 gin-config==0.5.0
 parameterized==0.8.1
