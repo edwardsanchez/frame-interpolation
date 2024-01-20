@@ -9,6 +9,7 @@ COPY . /app
 
 # Install any needed packages specified in requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
+RUN python3 -m pip install tensorflow
 
 # Define environment variable
 ENV NAME World
