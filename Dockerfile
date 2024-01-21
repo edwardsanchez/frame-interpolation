@@ -4,9 +4,6 @@ FROM tensorflow/tensorflow:2.15.0
 # Set the working directory in the container
 WORKDIR /app
 
-# Copy the current directory contents into the container at /app
-COPY . /app
-
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
     cmake \
@@ -16,7 +13,10 @@ RUN apt-get update && apt-get install -y \
     software-properties-common
 
 RUN pip install -r requirements.txt
-# RUN pip install numpy
+RUN pip install numpy
+
+# Copy the current directory contents into the container at /app
+COPY . /app
 
 # Run app.py when the container launches
 CMD ["python", "./predict.py"]

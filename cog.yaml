@@ -1,30 +1,31 @@
-build:
-  gpu: true
-  python_version: "3.10"  # Align with the Python version in the TensorFlow Docker image
-
-predict: "predict.py:Predictor"
-
-
 # build:
 #   gpu: true
-#   python_version: "3.11"
-#   system_packages:
-#     - "libgl1-mesa-glx"
-#     - "libglib2.0-0"
-#     - "cmake"
-#   python_packages:
-#     - "ipython==7.30.1"
-#     - "tensorflow==2.13.0"
-#     - "tensorflow-datasets==4.4.0"
-#     - "tensorflow-addons==0.23.0"
-#     - "absl-py>=1.0.0"
-#     - "gin-config==0.5.0"
-#     - "parameterized==0.8.1"
-#     - "mediapy==1.0.3"
-#     - "scikit-image==0.19.1"
-#     - "apache-beam==2.43.0"
-#   run:
-#     - apt-get update && apt-get install -y software-properties-common
-#     - apt-get install ffmpeg -y
+#   python_version: "3.10"  # Align with the Python version in the TensorFlow Docker image
 
 # predict: "predict.py:Predictor"
+
+
+build:
+  gpu: true
+  python_version: "3.11"
+  system_packages:
+    - "libgl1-mesa-glx"
+    - "libglib2.0-0"
+    - "cmake"
+  python_packages:
+    - "ipython==7.30.1"
+    - "tensorflow==2.13.0"
+    - "tensorflow-datasets==4.4.0"
+    - "tensorflow-addons==0.23.0"
+    - "absl-py>=1.0.0"
+    - "gin-config==0.5.0"
+    - "parameterized==0.8.1"
+    - "mediapy==1.0.3"
+    - "scikit-image==0.19.1"
+    - "apache-beam==2.43.0"
+    - "numpy"
+  run:
+    - apt-get update && apt-get install -y software-properties-common
+    - apt-get install ffmpeg -y
+
+predict: "predict.py:Predictor"
