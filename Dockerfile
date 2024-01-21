@@ -16,7 +16,7 @@ RUN apt-get update && apt-get install -y \
     software-properties-common
 
 RUN pip install -r requirements.txt
-RUN pip install numpy
+# RUN pip install numpy
 
 # Run app.py when the container launches
 CMD ["python", "./predict.py"]
@@ -62,3 +62,4 @@ CMD ["python", "./predict.py"]
 # CMD ["python", "./predict.py"]
 
 # # docker build --no-cache -t frame-interpolation .
+# docker build --platform linux/arm64 -t cog-frame-interpolation .
