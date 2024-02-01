@@ -6,6 +6,7 @@ import tensorflow as tf
 import mediapy
 from PIL import Image
 from typing import Any
+from cog import BasePredictor, Input, Path
 import cog
 
 from eval import interpolator, util
@@ -13,7 +14,7 @@ from eval import interpolator, util
 _UINT8_MAX_F = float(np.iinfo(np.uint8).max)
 
 
-class Predictor(cog.Predictor):
+class Predictor(BasePredictor):
     def setup(self):
         import tensorflow as tf
         print("Num GPUs Available: ", len(tf.config.list_physical_devices('GPU')))
