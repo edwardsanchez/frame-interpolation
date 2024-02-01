@@ -5,6 +5,7 @@ import tempfile
 import tensorflow as tf
 import mediapy
 from PIL import Image
+from typing import Any
 import cog
 
 from eval import interpolator, util
