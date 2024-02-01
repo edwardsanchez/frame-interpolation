@@ -23,27 +23,7 @@ class Predictor(BasePredictor):
         # Batched time.
         self.batch_dt = np.full(shape=(1,), fill_value=0.5, dtype=np.float32)
 
-    @cog.input(
-        "frame1",
-        type=Path,
-        help="The first input frame",
-    )
-    @cog.input(
-        "frame2",
-        type=Path,
-        help="The second input frame",
-    )
-    @cog.input(
-        "times_to_interpolate",
-        type=int,
-        default=1,
-        min=1,
-        max=8,
-        help="Controls the number of times the frame interpolator is invoked If set to 1, the output will be the "
-             "sub-frame at t=0.5; when set to > 1, the output will be the interpolation video with "
-             "(2^times_to_interpolate + 1) frames, fps of 30.",
-    )
-    def predict(self, frame1, frame2, times_to_interpolate):
+    def predict(self, frame1: Path = Input(description="The first input frame"), frame2: Path = Input(description="The second input frame"), times_to_interpolate: int = Input(description="The second input frame", default=1)) -> Any:
         INPUT_EXT = ['.png', '.jpg', '.jpeg']
         assert os.path.splitext(str(frame1))[-1] in INPUT_EXT and os.path.splitext(str(frame2))[-1] in INPUT_EXT, \
             "Please provide png, jpg or jpeg images."
