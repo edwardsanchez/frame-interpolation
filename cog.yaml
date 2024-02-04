@@ -16,8 +16,5 @@ build:
     - "mediapy==1.0.3"
     - "scikit-image==0.19.1"
     - "apache-beam==2.34.0"
-  run:
-    - apt-get update && apt-get install -y software-properties-common
-    - apt-get install ffmpeg -y
 
 predict: "predict.py:Predictor"
