@@ -9,6 +9,7 @@ from typing import Any
 from typing import List
 from cog import BasePredictor, Input, Path
 import cog
+import cloudinary.uploader
 
 from eval import interpolator, util
 
@@ -24,7 +25,7 @@ class Predictor(BasePredictor):
         # Batched time.
         self.batch_dt = np.full(shape=(1,), fill_value=0.5, dtype=np.float32)
 
-    def predict(self, frame1: cog.File = Input(description="The first input frame in a file"), frame2: cog.File = Input(description="The second input frame in a file"), times_to_interpolate: int = Input(description="The second input frame", default=1)) -> Any:
+    def predict(self, frame1: cog.File = Input(description="The first input frame in a file"), frame2: cog.File = Input(description="The second input frame in a file"), times_to_interpolate: int = Input(description="The second input frame", default=1), uuid: str = Input(description="The unique id to identify the images path")) -> Any:
 
         # Open files
         image_1 = Image.open(frame1)
@@ -51,8 +52,10 @@ class Predictor(BasePredictor):
 
         for i, img in enumerate(interpolated_frames):
             out_path = os.path.join(output_dir, f"image_{i}.jpg")
-            util.write_image(str(out_path), img)
-            urls.append(Path(out_path))
+            out_path_str = str(out_path)
+            util.write_image(out_path_str, img)
+            cloudinary_url = self.uploadCloudinary(out_path_str, uuid, i)
+            urls.append(cloudinary_url)
 
         # Return the URLs of interpolated frames
         return urls
@@ -73,3 +76,23 @@ class Predictor(BasePredictor):
         file_path_string = str(temp_file_path)
     
         return file_path_string
+    
+    def uploadCloudinary(self, local_path, uuid, index):
+        # Configure your Cloudinary credentials (replace with your actual credentials)
+        cloudinary.config( 
+            cloud_name = 'your_cloud_name', 
+            api_key = 'your_api_key', 
+            api_secret = 'your_api_secret'
+        )
+
+        # Define the filename (index)
+        filename = uuid + '_' + str(index)
+
+        # Upload the image with a custom folder and public ID
+        response = cloudinary.uploader.upload(
+            local_path,
+            public_id = filename
+        )
+
+        # Print the URL of the uploaded image
+        return response['url']
