@@ -80,9 +80,9 @@ class Predictor(BasePredictor):
     def uploadCloudinary(self, local_path, uuid, index):
         # Configure your Cloudinary credentials (replace with your actual credentials)
         cloudinary.config( 
-            cloud_name = 'your_cloud_name', 
-            api_key = 'your_api_key', 
-            api_secret = 'your_api_secret'
+            cloud_name = 'dsxjfe5v6', 
+            api_key = '361623989846232', 
+            api_secret = 'CoDJVlN1uf48a1YddJ4_4PXrywU'
         )
 
         # Define the filename (index)
