@@ -91,7 +91,8 @@ class Predictor(BasePredictor):
         # Upload the image with a custom folder and public ID
         response = cloudinary.uploader.upload(
             local_path,
-            public_id = filename
+            public_id = filename,
+            invalidate = True
         )
 
         # Print the URL of the uploaded image
