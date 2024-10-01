@@ -1,3 +1,5 @@
 /pretrained_models
 .DS_Store
 .vscode
+/frame_interpolation_env
+/eval/__pycache__
